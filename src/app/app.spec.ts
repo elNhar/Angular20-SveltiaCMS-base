@@ -18,6 +18,14 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, vite-angular-base');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Angular 20 + Sveltia CMS Base');
+  });
+
+  it('should render a card for every feature', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const app = fixture.componentInstance;
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelectorAll('.feature').length).toBe(app['features'].length);
   });
 });

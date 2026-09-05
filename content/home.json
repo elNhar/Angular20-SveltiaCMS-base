@@ -1,0 +1,5 @@
+{
+  "eyebrow": "Cloudflare Pages",
+  "title": "Angular 20 + Sveltia CMS Base",
+  "subtitle": "A production-ready starter combining Angular's application builder (Vite dev server, esbuild), server-side rendering and a git-based CMS — ready to deploy on Cloudflare Pages."
+}
