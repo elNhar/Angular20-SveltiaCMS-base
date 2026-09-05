@@ -65,25 +65,13 @@
     </div>
     <a href="#" class="link-underline">{{ instagramSection.linkLabel }}</a>
   </div>
-  <div class="insta-grid">
-    @for (p of posts; track p.caption) {
-      @if (p.postUrl) {
-        @defer (on viewport) {
-          <div class="insta-tile insta-tile--embed">
-            <app-instagram-embed [postUrl]="p.postUrl" />
-          </div>
-        } @placeholder {
-          <a href="#" class="insta-tile">
-            <img [ngSrc]="p.image" [alt]="p.caption" fill />
-            <span class="insta-tile__caption">{{ p.caption }}</span>
-          </a>
-        }
-      } @else {
-        <a href="#" class="insta-tile">
-          <img [ngSrc]="p.image" [alt]="p.caption" fill />
-          <span class="insta-tile__caption">{{ p.caption }}</span>
-        </a>
-      }
-    }
+  <div class="lightwidget-container">
+    <iframe
+      [src]="ingWidgetUrl"
+      scrolling="no"
+      allowtransparency="true"
+      class="lightwidget-widget"
+      frameborder="0">
+    </iframe>
   </div>
 </section>

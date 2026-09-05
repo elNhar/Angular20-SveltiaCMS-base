@@ -34,37 +34,6 @@
     "eyebrow": "Instagram",
     "handle": "@centrovitalia",
     "linkLabel": "Seguir en Instagram",
-    "posts": [
-      {
-        "caption": "Taller de lactancia",
-        "image": "/images/placeholders/placeholder-square.jpg",
-        "postUrl": "https://www.instagram.com/topiasupply/p/DO0wPQUCFyx/"
-      },
-      {
-        "caption": "Nuevo box de kinesiología",
-        "image": "/images/placeholders/placeholder-square.jpg",
-        "postUrl": ""
-      },
-      {
-        "caption": "Equipo de fonoaudiología",
-        "image": "/images/placeholders/placeholder-square.jpg",
-        "postUrl": ""
-      },
-      {
-        "caption": "Control sano: qué llevar",
-        "image": "/images/placeholders/placeholder-square.jpg",
-        "postUrl": ""
-      },
-      {
-        "caption": "Horario de vacaciones",
-        "image": "/images/placeholders/placeholder-square.jpg",
-        "postUrl": ""
-      },
-      {
-        "caption": "Antes y después de terapia",
-        "image": "/images/placeholders/placeholder-square.jpg",
-        "postUrl": ""
-      }
-    ]
+    "widgetUrl": "//lightwidget.com/widgets/6e7dc984077d545886156f55184052ce.html"
   }
 }
