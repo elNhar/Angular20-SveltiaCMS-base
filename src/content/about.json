@@ -10,7 +10,8 @@
       "Vitalia abrió en 2012 con dos boxes y tres profesionales. Lorem ipsum dolor sit amet, consectetur adipiscing elit: la idea era simple, que una familia pudiera resolver la evaluación, la terapia y el control en un mismo pasillo.",
       "Hoy somos veintiocho personas y nueve especialidades. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, excepteur sint occaecat cupidatat non proident."
     ],
-    "imageCaption": "foto: fachada del centro,\n2012"
+    "image": "/images/placeholders/placeholder-landscape.jpg",
+    "imageAlt": "Fachada del centro, 2012"
   },
   "milestones": [
     { "year": "2012", "text": "Abrimos con dos boxes en Providencia: pediatría y kinesiología." },

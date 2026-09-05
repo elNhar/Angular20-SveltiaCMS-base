@@ -36,6 +36,7 @@
 }
 
 .photo-tile {
+  position: relative;
   width: 100%;
   break-inside: avoid;
   margin-bottom: 14px;
@@ -44,11 +45,14 @@
   padding: 0;
   overflow: hidden;
   cursor: pointer;
-  display: flex;
-  align-items: flex-end;
+  display: block;
   text-align: left;
   font-family: var(--font-body);
   transition: transform 0.16s ease, box-shadow 0.16s ease;
+
+  img {
+    object-fit: cover;
+  }
 
   &:hover {
     transform: translateY(-3px);
@@ -56,7 +60,8 @@
   }
 
   &__caption {
-    width: 100%;
+    position: absolute;
+    inset: auto 0 0 0;
     padding: 14px;
     background: linear-gradient(180deg, transparent, oklch(0.350 0.049 305 / 0.72));
     color: #fff;
@@ -87,15 +92,12 @@
   }
 
   &__placeholder {
-    aspect-ratio: 4 / 3;
+    position: relative;
     border-radius: 16px;
-    background: repeating-linear-gradient(135deg, oklch(0.900 0.025 305) 0 12px, oklch(0.955 0.016 305) 12px 24px);
-    display: grid;
-    place-items: center;
+    overflow: hidden;
 
-    span {
-      font: 400 12.5px/1.5 ui-monospace, Menlo, monospace;
-      color: oklch(0.470 0.041 305);
+    img {
+      object-fit: cover;
     }
   }
 

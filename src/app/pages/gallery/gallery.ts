@@ -1,20 +1,17 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { SPECIALTIES } from '../../shared/specialties.data';
+import { NgOptimizedImage } from '@angular/common';
 import content from '../../../content/gallery.json';
 
 interface Photo {
   cat: string;
   caption: string;
   ratio: string;
-}
-
-interface DisplayPhoto extends Photo {
-  tint: string;
+  image: string;
 }
 
 @Component({
   selector: 'app-gallery',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,19 +28,14 @@ export class Gallery {
   private readonly rawPhotos: Photo[] = content.photos;
 
   private readonly activeCategory = signal(this.categories[0]);
-  private readonly lightboxCaption = signal<string | null>(null);
+  private readonly lightboxPhoto = signal<Photo | null>(null);
 
-  protected readonly photos = computed<DisplayPhoto[]>(() => {
+  protected readonly photos = computed<Photo[]>(() => {
     const cat = this.activeCategory();
-    return this.rawPhotos
-      .filter((p) => cat === this.categories[0] || p.cat === cat)
-      .map((p, i) => ({
-        ...p,
-        tint: `linear-gradient(150deg, ${SPECIALTIES[i % SPECIALTIES.length].tint}, oklch(0.970 0.012 305))`
-      }));
+    return this.rawPhotos.filter((p) => cat === this.categories[0] || p.cat === cat);
   });
 
-  protected readonly lightbox = computed(() => this.lightboxCaption());
+  protected readonly lightbox = computed(() => this.lightboxPhoto());
 
   protected isActive(category: string): boolean {
     return this.activeCategory() === category;
@@ -53,11 +45,11 @@ export class Gallery {
     this.activeCategory.set(category);
   }
 
-  protected open(caption: string): void {
-    this.lightboxCaption.set(caption);
+  protected open(photo: Photo): void {
+    this.lightboxPhoto.set(photo);
   }
 
   protected close(): void {
-    this.lightboxCaption.set(null);
+    this.lightboxPhoto.set(null);
   }
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import content from '../../../content/about.json';
 
 const ACCENTS: [string, string][] = [
@@ -11,7 +12,7 @@ const ACCENTS: [string, string][] = [
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './about.html',
   styleUrl: './about.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -32,7 +32,8 @@ collections:
               - { name: lead, label: Bajada, widget: text }
               - { name: primaryButtonLabel, label: Botón principal, widget: string }
               - { name: secondaryButtonLabel, label: Botón secundario, widget: string }
-              - { name: imageCaption, label: Descripción de la imagen (placeholder), widget: text }
+              - { name: image, label: Imagen, widget: image }
+              - { name: imageAlt, label: Texto alternativo de la imagen, widget: string }
               - { name: statNumber, label: Número destacado, widget: string }
               - { name: statLabel, label: Texto bajo el número, widget: string }
               - { name: badgeTitle, label: Título insignia, widget: string }
@@ -59,7 +60,14 @@ collections:
               - { name: eyebrow, label: Texto superior, widget: string }
               - { name: handle, label: Usuario, widget: string }
               - { name: linkLabel, label: Texto del link, widget: string }
-              - { name: posts, label: Publicaciones (texto), widget: list, label_singular: Publicación }
+              - name: posts
+                label: Publicaciones
+                widget: list
+                label_singular: Publicación
+                summary: '{{caption}}'
+                fields:
+                  - { name: caption, label: Descripción, widget: string }
+                  - { name: image, label: Imagen, widget: image }
 
       - name: about
         label: Quiénes somos
@@ -78,7 +86,8 @@ collections:
             fields:
               - { name: title, label: Título, widget: string }
               - { name: paragraphs, label: Párrafos, widget: list, label_singular: Párrafo }
-              - { name: imageCaption, label: Descripción de la imagen (placeholder), widget: text }
+              - { name: image, label: Imagen, widget: image }
+              - { name: imageAlt, label: Texto alternativo de la imagen, widget: string }
           - name: milestones
             label: Línea de tiempo
             widget: list
@@ -179,6 +188,7 @@ collections:
             fields:
               - { name: cat, label: Categoría (debe coincidir con una de arriba), widget: string }
               - { name: caption, label: Descripción, widget: string }
+              - { name: image, label: Imagen, widget: image }
               - name: ratio
                 label: Proporción
                 widget: select

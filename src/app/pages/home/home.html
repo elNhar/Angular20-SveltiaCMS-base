@@ -11,7 +11,7 @@
     </div>
     <div class="hero__media">
       <div class="hero__placeholder">
-        <span>{{ hero.imageCaption }}</span>
+        <img [ngSrc]="hero.image" [alt]="hero.imageAlt" fill priority />
       </div>
       <div class="hero__stat">
         <div class="hero__stat-num">{{ hero.statNumber }}</div>
@@ -67,7 +67,10 @@
   </div>
   <div class="insta-grid">
     @for (p of posts; track p.caption) {
-      <a href="#" class="insta-tile" [style.background]="p.tint">{{ p.caption }}</a>
+      <a href="#" class="insta-tile">
+        <img [ngSrc]="p.image" [alt]="p.caption" fill />
+        <span class="insta-tile__caption">{{ p.caption }}</span>
+      </a>
     }
   </div>
 </section>

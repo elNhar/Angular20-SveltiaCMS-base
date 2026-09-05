@@ -16,7 +16,8 @@
   </div>
   <div class="photo-grid">
     @for (p of photos(); track p.caption) {
-      <button type="button" class="photo-tile" [style.background]="p.tint" [style.aspect-ratio]="p.ratio" (click)="open(p.caption)">
+      <button type="button" class="photo-tile" [style.aspect-ratio]="p.ratio" (click)="open(p)">
+        <img [ngSrc]="p.image" [alt]="p.caption" fill />
         <span class="photo-tile__caption">{{ p.caption }}</span>
       </button>
     }
@@ -24,14 +25,14 @@
   <p class="gallery-note">{{ note }}</p>
 </section>
 
-@if (lightbox(); as caption) {
+@if (lightbox(); as photo) {
   <div class="lightbox" (click)="close()">
     <div class="lightbox__card">
-      <div class="lightbox__placeholder">
-        <span>{{ caption }}</span>
+      <div class="lightbox__placeholder" [style.aspect-ratio]="photo.ratio">
+        <img [ngSrc]="photo.image" [alt]="photo.caption" fill />
       </div>
       <div class="lightbox__footer">
-        <span>{{ caption }}</span>
+        <span>{{ photo.caption }}</span>
         <span class="lightbox__hint">Toca fuera para cerrar</span>
       </div>
     </div>

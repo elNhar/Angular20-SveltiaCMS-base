@@ -24,7 +24,7 @@
   </div>
   <div class="history__media">
     <div class="history__placeholder">
-      <span>{{ history.imageCaption }}</span>
+      <img [ngSrc]="history.image" [alt]="history.imageAlt" fill />
     </div>
     <div class="figures">
       @for (c of figures; track c.label) {

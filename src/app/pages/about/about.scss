@@ -26,18 +26,14 @@
   }
 
   &__placeholder {
+    position: relative;
     aspect-ratio: 4 / 3;
     border-radius: 18px;
     border: 1px solid oklch(0.870 0.016 305);
-    background: repeating-linear-gradient(135deg, oklch(0.930 0.021 305) 0 10px, oklch(0.965 0.012 305) 10px 20px);
-    display: grid;
-    place-items: center;
+    overflow: hidden;
 
-    span {
-      font: 400 12px/1.5 ui-monospace, Menlo, monospace;
-      color: oklch(0.530 0.033 305);
-      text-align: center;
-      white-space: pre-line;
+    img {
+      object-fit: cover;
     }
   }
 }

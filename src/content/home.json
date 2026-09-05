@@ -5,7 +5,8 @@
     "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Un equipo interdisciplinario que evalúa, trata y acompaña a cada familia en un mismo lugar, con horarios que se acomodan al colegio.",
     "primaryButtonLabel": "Reservar una hora",
     "secondaryButtonLabel": "Ver especialidades",
-    "imageCaption": "foto: sala de espera\ndel centro",
+    "image": "/images/placeholders/placeholder-landscape.jpg",
+    "imageAlt": "Sala de espera del centro",
     "statNumber": "+4.200",
     "statLabel": "atenciones al año",
     "badgeTitle": "Reembolso Isapres",
@@ -27,12 +28,12 @@
     "handle": "@centrovitalia",
     "linkLabel": "Seguir en Instagram",
     "posts": [
-      "Taller de lactancia",
-      "Nuevo box de kinesiología",
-      "Equipo de fonoaudiología",
-      "Control sano: qué llevar",
-      "Horario de vacaciones",
-      "Antes y después de terapia"
+      { "caption": "Taller de lactancia", "image": "/images/placeholders/placeholder-square.jpg" },
+      { "caption": "Nuevo box de kinesiología", "image": "/images/placeholders/placeholder-square.jpg" },
+      { "caption": "Equipo de fonoaudiología", "image": "/images/placeholders/placeholder-square.jpg" },
+      { "caption": "Control sano: qué llevar", "image": "/images/placeholders/placeholder-square.jpg" },
+      { "caption": "Horario de vacaciones", "image": "/images/placeholders/placeholder-square.jpg" },
+      { "caption": "Antes y después de terapia", "image": "/images/placeholders/placeholder-square.jpg" }
     ]
   }
 }
