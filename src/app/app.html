@@ -1,11 +1,8 @@
 <main class="page">
   <header class="hero">
-    <p class="hero__eyebrow">for Cloudflare Pages</p>
-    <h1 class="hero__title">Angular 20 + Sveltia CMS Base</h1>
-    <p class="hero__subtitle">
-      A production-ready starter combining Angular's application builder (Vite dev server,
-      esbuild), server-side rendering and a git-based CMS — ready to deploy on Cloudflare Pages.
-    </p>
+    <p class="hero__eyebrow">{{ hero.eyebrow }}</p>
+    <h1 class="hero__title">{{ hero.title }}</h1>
+    <p class="hero__subtitle">{{ hero.subtitle }}</p>
   </header>
 
   <section class="features" aria-label="Project features">

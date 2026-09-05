@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import homeContent from '../content/home.json';
 
 interface Feature {
   title: string;
@@ -10,9 +11,14 @@ interface Feature {
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
+  // Edited from the Sveltia CMS admin at /admin — each save commits directly to
+  // src/content/home.json, and the next build picks it up here at compile time.
+  protected readonly hero = homeContent;
+
   protected readonly features: Feature[] = [
     {
       title: 'Angular 20',

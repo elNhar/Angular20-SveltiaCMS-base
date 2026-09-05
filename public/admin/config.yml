@@ -21,7 +21,7 @@ collections:
     files:
       - name: home
         label: Home Page
-        file: content/home.json
+        file: src/content/home.json
         fields:
           - { name: eyebrow, label: Eyebrow, widget: string, default: 'Cloudflare Pages' }
           - { name: title, label: Title, widget: string }
