@@ -1,11 +1,8 @@
 <section class="page-hero">
   <div class="page-hero__inner">
-    <p class="eyebrow">Contacto</p>
-    <h1 class="page-hero__title">Estamos en Providencia, a dos cuadras del metro</h1>
-    <p class="page-hero__lead">
-      Escríbenos por WhatsApp para agendar más rápido, o déjanos tus datos y te llamamos dentro
-      del día hábil.
-    </p>
+    <p class="eyebrow">{{ hero.eyebrow }}</p>
+    <h1 class="page-hero__title">{{ hero.title }}</h1>
+    <p class="page-hero__lead">{{ hero.lead }}</p>
   </div>
 </section>
 
@@ -18,14 +15,14 @@
       </div>
     }
     <div class="details__actions">
-      <a href="#" class="btn btn--whatsapp">Escribir por WhatsApp</a>
-      <a href="tel:+56221234567" class="btn btn--outline">Llamar al centro</a>
+      <a href="#" class="btn btn--whatsapp">{{ whatsappButtonLabel }}</a>
+      <a href="tel:+56221234567" class="btn btn--outline">{{ callButtonLabel }}</a>
     </div>
   </div>
 
   <div class="booking" id="agenda">
-    <h2 class="booking__title">Solicitar una hora</h2>
-    <p class="booking__lead">Te confirmamos por teléfono o WhatsApp dentro del día hábil.</p>
+    <h2 class="booking__title">{{ booking.title }}</h2>
+    <p class="booking__lead">{{ booking.lead }}</p>
     <form class="booking-form" [formGroup]="form" (ngSubmit)="submit()">
       <label class="field">
         Nombre del paciente
@@ -55,40 +52,30 @@
       </label>
       <button type="submit" class="booking-form__submit">Enviar solicitud</button>
       @if (submitted()) {
-        <div class="booking-form__confirmation">
-          Solicitud enviada. Te contactamos dentro del día hábil. (Demo: no se envía nada.)
-        </div>
+        <div class="booking-form__confirmation">{{ booking.confirmationMessage }}</div>
       }
     </form>
   </div>
 </section>
 
 <section class="section directions">
-  <h2 class="section__title section__title--sm directions__title">Cómo llegar</h2>
+  <h2 class="section__title section__title--sm directions__title">{{ directions.title }}</h2>
   <div class="directions-card">
     <iframe
-      src="https://www.google.com/maps?q=Av.+Providencia+1234,+Providencia,+Santiago,+Chile&output=embed"
+      [src]="mapSrc"
       width="100%"
       height="420"
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
-      title="Mapa del centro"
+      [title]="directions.mapTitle"
     ></iframe>
     <div class="directions-card__grid">
-      <div>
-        <div class="directions-card__label">Metro</div>
-        <div class="directions-card__value">Estación Manuel Montt, salida sur. Dos cuadras caminando.</div>
-      </div>
-      <div>
-        <div class="directions-card__label">Estacionamiento</div>
-        <div class="directions-card__value">
-          Convenio con estacionamiento subterráneo del edificio, primera hora liberada.
+      @for (item of directions.items; track item.label) {
+        <div>
+          <div class="directions-card__label">{{ item.label }}</div>
+          <div class="directions-card__value">{{ item.value }}</div>
         </div>
-      </div>
-      <div>
-        <div class="directions-card__label">Accesibilidad</div>
-        <div class="directions-card__value">Acceso sin escalones, ascensor y baño adaptado en el piso 5.</div>
-      </div>
+      }
     </div>
   </div>
 </section>

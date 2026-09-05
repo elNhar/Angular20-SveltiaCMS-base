@@ -1,0 +1,85 @@
+{
+  "hero": {
+    "eyebrow": "Quiénes somos",
+    "title": "Un centro pensado desde la consulta, no desde la sala de espera",
+    "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+  },
+  "history": {
+    "title": "Nuestra historia",
+    "paragraphs": [
+      "Vitalia abrió en 2012 con dos boxes y tres profesionales. Lorem ipsum dolor sit amet, consectetur adipiscing elit: la idea era simple, que una familia pudiera resolver la evaluación, la terapia y el control en un mismo pasillo.",
+      "Hoy somos veintiocho personas y nueve especialidades. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, excepteur sint occaecat cupidatat non proident."
+    ],
+    "imageCaption": "foto: fachada del centro,\n2012"
+  },
+  "milestones": [
+    { "year": "2012", "text": "Abrimos con dos boxes en Providencia: pediatría y kinesiología." },
+    { "year": "2016", "text": "Se suman fonoaudiología, nutrición y psicología infantil." },
+    { "year": "2020", "text": "Telemedicina y control remoto durante la pandemia." },
+    { "year": "2024", "text": "Nueva sede de 640 m² con nueve especialidades y sala de terapia sensorial." }
+  ],
+  "figures": [
+    { "n": "28", "label": "profesionales" },
+    { "n": "9", "label": "especialidades" },
+    { "n": "14", "label": "años atendiendo" }
+  ],
+  "team": {
+    "title": "El equipo",
+    "lead": "Nueve especialidades, un solo equipo clínico que se reúne cada semana a revisar casos.",
+    "members": [
+      {
+        "initials": "CM",
+        "name": "Dra. Carolina Méndez",
+        "role": "Pediatría · Directora médica",
+        "bio": "Lorem ipsum dolor sit amet. U. de Chile, 2004. Magíster en pediatría del desarrollo."
+      },
+      {
+        "initials": "JR",
+        "name": "Dr. Javier Rojas",
+        "role": "Neurología infantil",
+        "bio": "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+      },
+      {
+        "initials": "PS",
+        "name": "Paula Soto",
+        "role": "Fonoaudiología",
+        "bio": "Lenguaje y deglución en primera infancia. Diez años en atención temprana."
+      },
+      {
+        "initials": "MI",
+        "name": "Matías Ibáñez",
+        "role": "Kinesiología",
+        "bio": "Kinesiterapia respiratoria pediátrica y rehabilitación motora."
+      },
+      {
+        "initials": "AF",
+        "name": "Antonia Fuentes",
+        "role": "Nutrición infantil",
+        "bio": "Selectividad alimentaria y manejo nutricional en alergias."
+      },
+      {
+        "initials": "RV",
+        "name": "Rodrigo Vera",
+        "role": "Psicología",
+        "bio": "Terapia individual y orientación a padres. Enfoque cognitivo-conductual."
+      }
+    ]
+  },
+  "values": {
+    "title": "Cómo trabajamos",
+    "items": [
+      {
+        "title": "Una sola conversación",
+        "body": "El equipo revisa los casos en conjunto cada semana, así no repites la historia en cada box."
+      },
+      {
+        "title": "Tiempo real de consulta",
+        "body": "Cuarenta minutos por control y treinta por sesión de terapia. Sin sobreagenda."
+      },
+      {
+        "title": "Boleta y bono al día",
+        "body": "Documentación lista al salir para que el reembolso en tu Isapre no dependa de un trámite extra."
+      }
+    ]
+  }
+}

@@ -1,11 +1,8 @@
 <section class="page-hero">
   <div class="page-hero__inner">
-    <p class="eyebrow">Galería</p>
-    <h1 class="page-hero__title">Cómo es el centro por dentro</h1>
-    <p class="page-hero__lead">
-      Boxes, sala de terapia sensorial y espacios de espera. Lorem ipsum dolor sit amet,
-      consectetur adipiscing elit.
-    </p>
+    <p class="eyebrow">{{ hero.eyebrow }}</p>
+    <h1 class="page-hero__title">{{ hero.title }}</h1>
+    <p class="page-hero__lead">{{ hero.lead }}</p>
   </div>
 </section>
 
@@ -24,7 +21,7 @@
       </button>
     }
   </div>
-  <p class="gallery-note">Marcos de demostración &mdash; reemplazables por fotografías reales del centro.</p>
+  <p class="gallery-note">{{ note }}</p>
 </section>
 
 @if (lightbox(); as caption) {

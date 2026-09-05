@@ -1,29 +1,25 @@
 <section class="hero">
   <div class="hero__inner">
     <div class="hero__copy">
-      <p class="eyebrow eyebrow--orange">Centro médico infantil y familiar</p>
-      <h1 class="hero__title">Nueve especialidades para el desarrollo de tus hijos</h1>
-      <p class="hero__lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Un equipo interdisciplinario que
-        evalúa, trata y acompaña a cada familia en un mismo lugar, con horarios que se acomodan al
-        colegio.
-      </p>
+      <p class="eyebrow eyebrow--orange">{{ hero.eyebrow }}</p>
+      <h1 class="hero__title">{{ hero.title }}</h1>
+      <p class="hero__lead">{{ hero.lead }}</p>
       <div class="hero__actions">
-        <a routerLink="/contacto" class="btn btn--solid">Reservar una hora</a>
-        <a routerLink="/servicios" class="btn btn--outline">Ver especialidades</a>
+        <a routerLink="/contacto" class="btn btn--solid">{{ hero.primaryButtonLabel }}</a>
+        <a routerLink="/servicios" class="btn btn--outline">{{ hero.secondaryButtonLabel }}</a>
       </div>
     </div>
     <div class="hero__media">
       <div class="hero__placeholder">
-        <span>foto: sala de espera<br />del centro</span>
+        <span>{{ hero.imageCaption }}</span>
       </div>
       <div class="hero__stat">
-        <div class="hero__stat-num">+4.200</div>
-        <div class="hero__stat-label">atenciones al año</div>
+        <div class="hero__stat-num">{{ hero.statNumber }}</div>
+        <div class="hero__stat-label">{{ hero.statLabel }}</div>
       </div>
       <div class="hero__badge">
-        <div class="hero__badge-title">Reembolso Isapres</div>
-        <div class="hero__badge-body">Boleta electrónica y bono al salir de la consulta</div>
+        <div class="hero__badge-title">{{ hero.badgeTitle }}</div>
+        <div class="hero__badge-body">{{ hero.badgeBody }}</div>
       </div>
     </div>
   </div>
@@ -31,8 +27,8 @@
 
 <section class="section">
   <div class="section__header">
-    <h2 class="section__title">Nuestras especialidades</h2>
-    <a routerLink="/servicios" class="link-underline">Ver detalle de cada una</a>
+    <h2 class="section__title">{{ specialtiesSection.title }}</h2>
+    <a routerLink="/servicios" class="link-underline">{{ specialtiesSection.linkLabel }}</a>
   </div>
   <div class="specialty-grid">
     @for (e of specialties; track e.name) {
@@ -48,17 +44,13 @@
 <section class="isapres">
   <div class="isapres__inner">
     <div>
-      <p class="eyebrow eyebrow--on-brand">Reembolso Isapres</p>
-      <h2 class="isapres__title">Atendemos como particular con boleta para reembolso</h2>
-      <p class="isapres__lead">
-        Lorem ipsum dolor sit amet: emitimos boleta electrónica y bono de atención para que
-        presentes el reembolso en tu Isapre. El porcentaje depende de tu plan; en recepción te
-        ayudamos con el trámite.
-      </p>
-      <a routerLink="/contacto" class="btn btn--on-brand">Consultar por tu plan</a>
+      <p class="eyebrow eyebrow--on-brand">{{ isapresSection.eyebrow }}</p>
+      <h2 class="isapres__title">{{ isapresSection.title }}</h2>
+      <p class="isapres__lead">{{ isapresSection.lead }}</p>
+      <a routerLink="/contacto" class="btn btn--on-brand">{{ isapresSection.buttonLabel }}</a>
     </div>
     <div class="isapres__grid">
-      @for (i of isapres; track i) {
+      @for (i of isapresSection.isapres; track i) {
         <div class="isapres__chip">{{ i }}</div>
       }
     </div>
@@ -68,10 +60,10 @@
 <section class="section">
   <div class="section__header">
     <div>
-      <p class="eyebrow">Instagram</p>
-      <h2 class="section__title section__title--sm">&#64;centrovitalia</h2>
+      <p class="eyebrow">{{ instagramSection.eyebrow }}</p>
+      <h2 class="section__title section__title--sm">{{ instagramSection.handle }}</h2>
     </div>
-    <a href="#" class="link-underline">Seguir en Instagram</a>
+    <a href="#" class="link-underline">{{ instagramSection.linkLabel }}</a>
   </div>
   <div class="insta-grid">
     @for (p of posts; track p.caption) {

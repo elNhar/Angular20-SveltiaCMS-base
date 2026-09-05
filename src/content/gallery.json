@@ -1,0 +1,23 @@
+{
+  "hero": {
+    "eyebrow": "Galería",
+    "title": "Cómo es el centro por dentro",
+    "lead": "Boxes, sala de terapia sensorial y espacios de espera. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  "note": "Marcos de demostración — reemplazables por fotografías reales del centro.",
+  "categories": ["Todas", "Instalaciones", "Boxes", "Terapias", "Equipo"],
+  "photos": [
+    { "cat": "Instalaciones", "caption": "Recepción y sala de espera", "ratio": "4/3" },
+    { "cat": "Boxes", "caption": "Box de pediatría 1", "ratio": "3/4" },
+    { "cat": "Terapias", "caption": "Sala de integración sensorial", "ratio": "4/3" },
+    { "cat": "Instalaciones", "caption": "Pasillo de especialidades", "ratio": "4/3" },
+    { "cat": "Terapias", "caption": "Sesión de kinesiterapia respiratoria", "ratio": "3/4" },
+    { "cat": "Boxes", "caption": "Box de oftalmología", "ratio": "4/3" },
+    { "cat": "Equipo", "caption": "Reunión clínica semanal", "ratio": "4/3" },
+    { "cat": "Terapias", "caption": "Terapia de lenguaje con material de juego", "ratio": "4/3" },
+    { "cat": "Instalaciones", "caption": "Rincón de espera infantil", "ratio": "3/4" },
+    { "cat": "Equipo", "caption": "Equipo de fonoaudiología", "ratio": "4/3" },
+    { "cat": "Boxes", "caption": "Box de nutrición", "ratio": "4/3" },
+    { "cat": "Instalaciones", "caption": "Fachada en Av. Providencia", "ratio": "3/4" }
+  ]
+}

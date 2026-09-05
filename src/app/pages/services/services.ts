@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SPECIALTIES } from '../../shared/specialties.data';
+import content from '../../../content/services.json';
 
 @Component({
   selector: 'app-services',
@@ -10,6 +11,10 @@ import { SPECIALTIES } from '../../shared/specialties.data';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Services {
+  // Edited from the Sveltia CMS admin at /admin — see src/content/services.json.
+  protected readonly hero = content.hero;
+  protected readonly isapresNote = content.isapresNote;
+
   protected readonly specialties = SPECIALTIES;
 
   private readonly openIndexes = signal<ReadonlySet<number>>(new Set([0]));

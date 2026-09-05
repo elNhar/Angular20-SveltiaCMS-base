@@ -17,12 +17,211 @@ public_folder: /images/uploads
 
 collections:
   - name: pages
-    label: Pages
+    label: Páginas
     files:
       - name: home
-        label: Home Page
+        label: Inicio
         file: src/content/home.json
         fields:
-          - { name: eyebrow, label: Eyebrow, widget: string, default: 'Cloudflare Pages' }
-          - { name: title, label: Title, widget: string }
-          - { name: subtitle, label: Subtitle, widget: text }
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: Texto superior, widget: string }
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+              - { name: primaryButtonLabel, label: Botón principal, widget: string }
+              - { name: secondaryButtonLabel, label: Botón secundario, widget: string }
+              - { name: imageCaption, label: Descripción de la imagen (placeholder), widget: text }
+              - { name: statNumber, label: Número destacado, widget: string }
+              - { name: statLabel, label: Texto bajo el número, widget: string }
+              - { name: badgeTitle, label: Título insignia, widget: string }
+              - { name: badgeBody, label: Texto insignia, widget: text }
+          - name: specialtiesSection
+            label: Sección de especialidades
+            widget: object
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: linkLabel, label: Texto del link, widget: string }
+          - name: isapresSection
+            label: Sección de reembolso Isapres
+            widget: object
+            fields:
+              - { name: eyebrow, label: Texto superior, widget: string }
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+              - { name: buttonLabel, label: Texto del botón, widget: string }
+              - { name: isapres, label: Isapres, widget: list, label_singular: Isapre }
+          - name: instagramSection
+            label: Sección de Instagram
+            widget: object
+            fields:
+              - { name: eyebrow, label: Texto superior, widget: string }
+              - { name: handle, label: Usuario, widget: string }
+              - { name: linkLabel, label: Texto del link, widget: string }
+              - { name: posts, label: Publicaciones (texto), widget: list, label_singular: Publicación }
+
+      - name: about
+        label: Quiénes somos
+        file: src/content/about.json
+        fields:
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: Texto superior, widget: string }
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+          - name: history
+            label: Nuestra historia
+            widget: object
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: paragraphs, label: Párrafos, widget: list, label_singular: Párrafo }
+              - { name: imageCaption, label: Descripción de la imagen (placeholder), widget: text }
+          - name: milestones
+            label: Línea de tiempo
+            widget: list
+            label_singular: Hito
+            fields:
+              - { name: year, label: Año, widget: string }
+              - { name: text, label: Texto, widget: text }
+          - name: figures
+            label: Cifras
+            widget: list
+            label_singular: Cifra
+            fields:
+              - { name: n, label: Número, widget: string }
+              - { name: label, label: Etiqueta, widget: string }
+          - name: team
+            label: Equipo
+            widget: object
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+              - name: members
+                label: Integrantes
+                widget: list
+                label_singular: Integrante
+                fields:
+                  - { name: initials, label: Iniciales, widget: string }
+                  - { name: name, label: Nombre, widget: string }
+                  - { name: role, label: Rol, widget: string }
+                  - { name: bio, label: Bio, widget: text }
+          - name: values
+            label: Cómo trabajamos
+            widget: object
+            fields:
+              - { name: title, label: Título, widget: string }
+              - name: items
+                label: Valores
+                widget: list
+                label_singular: Valor
+                fields:
+                  - { name: title, label: Título, widget: string }
+                  - { name: body, label: Texto, widget: text }
+
+      - name: services
+        label: Servicios
+        file: src/content/services.json
+        fields:
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: Texto superior, widget: string }
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+          - name: isapresNote
+            label: Nota de reembolso Isapres
+            widget: object
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: body, label: Texto, widget: text }
+
+      - name: specialties
+        label: Especialidades (compartido)
+        file: src/content/specialties.json
+        fields:
+          - name: items
+            label: Especialidades
+            widget: list
+            label_singular: Especialidad
+            summary: '{{name}}'
+            fields:
+              - { name: mark, label: Sigla (2 letras), widget: string, pattern: ['^.{1,3}$', 'Máximo 3 caracteres'] }
+              - { name: name, label: Nombre, widget: string }
+              - { name: tagline, label: Bajada corta, widget: string }
+              - { name: edades, label: Edades, widget: string }
+              - { name: duracion, label: Duración de la sesión, widget: string }
+              - { name: equipo, label: Profesionales, widget: string }
+              - { name: body, label: Descripción completa, widget: text }
+              - { name: incluye, label: Qué incluye, widget: list, label_singular: Ítem }
+
+      - name: gallery
+        label: Galería
+        file: src/content/gallery.json
+        fields:
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: Texto superior, widget: string }
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+          - { name: note, label: Nota al pie de la galería, widget: text }
+          - { name: categories, label: Categorías (la primera es "mostrar todas"), widget: list, label_singular: Categoría }
+          - name: photos
+            label: Fotos
+            widget: list
+            label_singular: Foto
+            summary: '{{caption}}'
+            fields:
+              - { name: cat, label: Categoría (debe coincidir con una de arriba), widget: string }
+              - { name: caption, label: Descripción, widget: string }
+              - name: ratio
+                label: Proporción
+                widget: select
+                options: ['4/3', '3/4', '1/1']
+
+      - name: contact
+        label: Contacto
+        file: src/content/contact.json
+        fields:
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: Texto superior, widget: string }
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+          - name: details
+            label: Datos de contacto
+            widget: list
+            label_singular: Dato
+            fields:
+              - { name: label, label: Etiqueta, widget: string }
+              - { name: value, label: Valor, widget: string }
+          - { name: whatsappButtonLabel, label: Texto del botón de WhatsApp, widget: string }
+          - { name: callButtonLabel, label: Texto del botón de llamada, widget: string }
+          - name: booking
+            label: Formulario de reserva
+            widget: object
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: lead, label: Bajada, widget: text }
+              - { name: confirmationMessage, label: Mensaje de confirmación, widget: text }
+          - name: directions
+            label: Cómo llegar
+            widget: object
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: mapQuery, label: Dirección para el mapa, widget: string }
+              - { name: mapTitle, label: Título accesible del mapa, widget: string }
+              - name: items
+                label: Datos de llegada
+                widget: list
+                label_singular: Dato
+                fields:
+                  - { name: label, label: Etiqueta, widget: string }
+                  - { name: value, label: Valor, widget: string }

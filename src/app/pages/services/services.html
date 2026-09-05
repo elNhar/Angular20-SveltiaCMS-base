@@ -1,11 +1,8 @@
 <section class="page-hero">
   <div class="page-hero__inner">
-    <p class="eyebrow">Servicios</p>
-    <h1 class="page-hero__title">Nueve especialidades, un mismo equipo</h1>
-    <p class="page-hero__lead">
-      Toca cada especialidad para ver qué incluye, desde qué edad atendemos y cuánto dura la
-      sesión. Todas se atienden como particular con boleta para reembolso.
-    </p>
+    <p class="eyebrow">{{ hero.eyebrow }}</p>
+    <h1 class="page-hero__title">{{ hero.title }}</h1>
+    <p class="page-hero__lead">{{ hero.lead }}</p>
   </div>
 </section>
 
@@ -56,11 +53,7 @@
 
 <section class="isapres-note">
   <div class="isapres-note__card">
-    <h2 class="isapres-note__title">Reembolso Isapres</h2>
-    <p class="isapres-note__body">
-      Todas las prestaciones se atienden como particular. Emitimos boleta electrónica y bono para
-      presentar el reembolso en Fonasa o tu Isapre. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit.
-    </p>
+    <h2 class="isapres-note__title">{{ isapresNote.title }}</h2>
+    <p class="isapres-note__body">{{ isapresNote.body }}</p>
   </div>
 </section>

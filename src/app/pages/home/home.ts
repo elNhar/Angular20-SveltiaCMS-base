@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SPECIALTIES } from '../../shared/specialties.data';
+import content from '../../../content/home.json';
 
 interface InstagramPost {
   caption: string;
@@ -15,18 +16,15 @@ interface InstagramPost {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home {
+  // Edited from the Sveltia CMS admin at /admin — see src/content/home.json.
+  protected readonly hero = content.hero;
+  protected readonly specialtiesSection = content.specialtiesSection;
+  protected readonly isapresSection = content.isapresSection;
+  protected readonly instagramSection = content.instagramSection;
+
   protected readonly specialties = SPECIALTIES;
 
-  protected readonly isapres = ['Fonasa', 'Banmédica', 'Colmena', 'Consalud', 'Cruz Blanca', 'Nueva Masvida'];
-
-  protected readonly posts: InstagramPost[] = [
-    'Taller de lactancia',
-    'Nuevo box de kinesiología',
-    'Equipo de fonoaudiología',
-    'Control sano: qué llevar',
-    'Horario de vacaciones',
-    'Antes y después de terapia'
-  ].map((caption, i) => ({
+  protected readonly posts: InstagramPost[] = content.instagramSection.posts.map((caption, i) => ({
     caption,
     tint: `linear-gradient(150deg, ${SPECIALTIES[i % SPECIALTIES.length].tint}, oklch(0.970 0.012 305))`
   }));

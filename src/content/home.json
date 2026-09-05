@@ -1,5 +1,38 @@
 {
-  "eyebrow": "intended to use with Cloudflare Pages",
-  "title": "Angular 20 + Sveltia CMS Base",
-  "subtitle": "A production-ready starter combining Angular's application builder (Vite dev server, esbuild), server-side rendering and a git-based CMS — ready to deploy on Cloudflare Pages."
+  "hero": {
+    "eyebrow": "Centro médico infantil y familiar",
+    "title": "Nueve especialidades para el desarrollo de tus hijos",
+    "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Un equipo interdisciplinario que evalúa, trata y acompaña a cada familia en un mismo lugar, con horarios que se acomodan al colegio.",
+    "primaryButtonLabel": "Reservar una hora",
+    "secondaryButtonLabel": "Ver especialidades",
+    "imageCaption": "foto: sala de espera\ndel centro",
+    "statNumber": "+4.200",
+    "statLabel": "atenciones al año",
+    "badgeTitle": "Reembolso Isapres",
+    "badgeBody": "Boleta electrónica y bono al salir de la consulta"
+  },
+  "specialtiesSection": {
+    "title": "Nuestras especialidades",
+    "linkLabel": "Ver detalle de cada una"
+  },
+  "isapresSection": {
+    "eyebrow": "Reembolso Isapres",
+    "title": "Atendemos como particular con boleta para reembolso",
+    "lead": "Lorem ipsum dolor sit amet: emitimos boleta electrónica y bono de atención para que presentes el reembolso en tu Isapre. El porcentaje depende de tu plan; en recepción te ayudamos con el trámite.",
+    "buttonLabel": "Consultar por tu plan",
+    "isapres": ["Fonasa", "Banmédica", "Colmena", "Consalud", "Cruz Blanca", "Nueva Masvida"]
+  },
+  "instagramSection": {
+    "eyebrow": "Instagram",
+    "handle": "@centrovitalia",
+    "linkLabel": "Seguir en Instagram",
+    "posts": [
+      "Taller de lactancia",
+      "Nuevo box de kinesiología",
+      "Equipo de fonoaudiología",
+      "Control sano: qué llevar",
+      "Horario de vacaciones",
+      "Antes y después de terapia"
+    ]
+  }
 }

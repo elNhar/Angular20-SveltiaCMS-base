@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { SPECIALTIES } from '../../shared/specialties.data';
-
-interface ContactDetail {
-  label: string;
-  value: string;
-}
+import content from '../../../content/contact.json';
 
 @Component({
   selector: 'app-contact',
@@ -16,14 +13,19 @@ interface ContactDetail {
 })
 export class Contact {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly sanitizer = inject(DomSanitizer);
 
-  protected readonly details: ContactDetail[] = [
-    { label: 'Dirección', value: 'Av. Providencia 1234, oficina 502, Providencia, Santiago' },
-    { label: 'Teléfono', value: '+56 2 2123 4567' },
-    { label: 'WhatsApp', value: '+56 9 8765 4321' },
-    { label: 'Correo', value: 'hola@centrovitalia.cl' },
-    { label: 'Horario', value: 'Lunes a viernes 08:30 – 19:30 · Sábado 09:00 – 14:00' }
-  ];
+  // Edited from the Sveltia CMS admin at /admin — see src/content/contact.json.
+  protected readonly hero = content.hero;
+  protected readonly details = content.details;
+  protected readonly whatsappButtonLabel = content.whatsappButtonLabel;
+  protected readonly callButtonLabel = content.callButtonLabel;
+  protected readonly booking = content.booking;
+  protected readonly directions = content.directions;
+
+  protected readonly mapSrc: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+    `https://www.google.com/maps?q=${encodeURIComponent(content.directions.mapQuery)}&output=embed`
+  );
 
   protected readonly specialtyNames = SPECIALTIES.map((s) => s.name);
 

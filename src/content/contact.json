@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "eyebrow": "Contacto",
+    "title": "Estamos en Providencia, a dos cuadras del metro",
+    "lead": "Escríbenos por WhatsApp para agendar más rápido, o déjanos tus datos y te llamamos dentro del día hábil."
+  },
+  "details": [
+    { "label": "Dirección", "value": "Av. Providencia 1234, oficina 502, Providencia, Santiago" },
+    { "label": "Teléfono", "value": "+56 2 2123 4567" },
+    { "label": "WhatsApp", "value": "+56 9 8765 4321" },
+    { "label": "Correo", "value": "hola@centrovitalia.cl" },
+    { "label": "Horario", "value": "Lunes a viernes 08:30 – 19:30 · Sábado 09:00 – 14:00" }
+  ],
+  "whatsappButtonLabel": "Escribir por WhatsApp",
+  "callButtonLabel": "Llamar al centro",
+  "booking": {
+    "title": "Solicitar una hora",
+    "lead": "Te confirmamos por teléfono o WhatsApp dentro del día hábil.",
+    "confirmationMessage": "Solicitud enviada. Te contactamos dentro del día hábil. (Demo: no se envía nada.)"
+  },
+  "directions": {
+    "title": "Cómo llegar",
+    "mapQuery": "Av. Providencia 1234, Providencia, Santiago, Chile",
+    "mapTitle": "Mapa del centro",
+    "items": [
+      { "label": "Metro", "value": "Estación Manuel Montt, salida sur. Dos cuadras caminando." },
+      {
+        "label": "Estacionamiento",
+        "value": "Convenio con estacionamiento subterráneo del edificio, primera hora liberada."
+      },
+      { "label": "Accesibilidad", "value": "Acceso sin escalones, ascensor y baño adaptado en el piso 5." }
+    ]
+  }
+}

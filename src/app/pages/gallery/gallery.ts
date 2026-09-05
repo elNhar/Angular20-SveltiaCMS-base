@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { SPECIALTIES } from '../../shared/specialties.data';
-
-type Category = 'Todas' | 'Instalaciones' | 'Boxes' | 'Terapias' | 'Equipo';
+import content from '../../../content/gallery.json';
 
 interface Photo {
-  cat: Exclude<Category, 'Todas'>;
+  cat: string;
   caption: string;
   ratio: string;
 }
@@ -12,23 +11,6 @@ interface Photo {
 interface DisplayPhoto extends Photo {
   tint: string;
 }
-
-const CATEGORIES: Category[] = ['Todas', 'Instalaciones', 'Boxes', 'Terapias', 'Equipo'];
-
-const PHOTOS: Photo[] = [
-  { cat: 'Instalaciones', caption: 'Recepción y sala de espera', ratio: '4/3' },
-  { cat: 'Boxes', caption: 'Box de pediatría 1', ratio: '3/4' },
-  { cat: 'Terapias', caption: 'Sala de integración sensorial', ratio: '4/3' },
-  { cat: 'Instalaciones', caption: 'Pasillo de especialidades', ratio: '4/3' },
-  { cat: 'Terapias', caption: 'Sesión de kinesiterapia respiratoria', ratio: '3/4' },
-  { cat: 'Boxes', caption: 'Box de oftalmología', ratio: '4/3' },
-  { cat: 'Equipo', caption: 'Reunión clínica semanal', ratio: '4/3' },
-  { cat: 'Terapias', caption: 'Terapia de lenguaje con material de juego', ratio: '4/3' },
-  { cat: 'Instalaciones', caption: 'Rincón de espera infantil', ratio: '3/4' },
-  { cat: 'Equipo', caption: 'Equipo de fonoaudiología', ratio: '4/3' },
-  { cat: 'Boxes', caption: 'Box de nutrición', ratio: '4/3' },
-  { cat: 'Instalaciones', caption: 'Fachada en Av. Providencia', ratio: '3/4' }
-];
 
 @Component({
   selector: 'app-gallery',
@@ -41,26 +23,33 @@ const PHOTOS: Photo[] = [
   }
 })
 export class Gallery {
-  protected readonly categories = CATEGORIES;
+  // Edited from the Sveltia CMS admin at /admin — see src/content/gallery.json.
+  protected readonly hero = content.hero;
+  protected readonly note = content.note;
+  protected readonly categories = content.categories;
 
-  private readonly activeCategory = signal<Category>('Todas');
+  private readonly rawPhotos: Photo[] = content.photos;
+
+  private readonly activeCategory = signal(this.categories[0]);
   private readonly lightboxCaption = signal<string | null>(null);
 
   protected readonly photos = computed<DisplayPhoto[]>(() => {
     const cat = this.activeCategory();
-    return PHOTOS.filter((p) => cat === 'Todas' || p.cat === cat).map((p, i) => ({
-      ...p,
-      tint: `linear-gradient(150deg, ${SPECIALTIES[i % SPECIALTIES.length].tint}, oklch(0.970 0.012 305))`
-    }));
+    return this.rawPhotos
+      .filter((p) => cat === this.categories[0] || p.cat === cat)
+      .map((p, i) => ({
+        ...p,
+        tint: `linear-gradient(150deg, ${SPECIALTIES[i % SPECIALTIES.length].tint}, oklch(0.970 0.012 305))`
+      }));
   });
 
   protected readonly lightbox = computed(() => this.lightboxCaption());
 
-  protected isActive(category: Category): boolean {
+  protected isActive(category: string): boolean {
     return this.activeCategory() === category;
   }
 
-  protected pick(category: Category): void {
+  protected pick(category: string): void {
     this.activeCategory.set(category);
   }
 
