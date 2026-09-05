@@ -1,6 +1,6 @@
 {
   "hero": {
-    "eyebrow": "Centro médico infantil y familiar",
+    "eyebrow": "Centro médico infantil y familiarssssss",
     "title": "Nueve especialidades para el desarrollo de tus hijos",
     "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Un equipo interdisciplinario que evalúa, trata y acompaña a cada familia en un mismo lugar, con horarios que se acomodan al colegio.",
     "primaryButtonLabel": "Reservar una hora",
@@ -21,7 +21,14 @@
     "title": "Atendemos como particular con boleta para reembolso",
     "lead": "Lorem ipsum dolor sit amet: emitimos boleta electrónica y bono de atención para que presentes el reembolso en tu Isapre. El porcentaje depende de tu plan; en recepción te ayudamos con el trámite.",
     "buttonLabel": "Consultar por tu plan",
-    "isapres": ["Fonasa", "Banmédica", "Colmena", "Consalud", "Cruz Blanca", "Nueva Masvida"]
+    "isapres": [
+      "Fonasa",
+      "Banmédica",
+      "Colmena",
+      "Consalud",
+      "Cruz Blanca",
+      "Nueva Masvida"
+    ]
   },
   "instagramSection": {
     "eyebrow": "Instagram",
