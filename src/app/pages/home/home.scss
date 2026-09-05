@@ -228,4 +228,12 @@
     font-size: 12px;
     line-height: 1.4;
   }
+
+  &--embed {
+    aspect-ratio: auto;
+    overflow: visible;
+    border: none;
+    display: flex;
+    justify-content: center;
+  }
 }

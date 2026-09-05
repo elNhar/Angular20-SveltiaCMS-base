@@ -67,10 +67,23 @@
   </div>
   <div class="insta-grid">
     @for (p of posts; track p.caption) {
-      <a href="#" class="insta-tile">
-        <img [ngSrc]="p.image" [alt]="p.caption" fill />
-        <span class="insta-tile__caption">{{ p.caption }}</span>
-      </a>
+      @if (p.postUrl) {
+        @defer (on viewport) {
+          <div class="insta-tile insta-tile--embed">
+            <app-instagram-embed [postUrl]="p.postUrl" />
+          </div>
+        } @placeholder {
+          <a href="#" class="insta-tile">
+            <img [ngSrc]="p.image" [alt]="p.caption" fill />
+            <span class="insta-tile__caption">{{ p.caption }}</span>
+          </a>
+        }
+      } @else {
+        <a href="#" class="insta-tile">
+          <img [ngSrc]="p.image" [alt]="p.caption" fill />
+          <span class="insta-tile__caption">{{ p.caption }}</span>
+        </a>
+      }
     }
   </div>
 </section>

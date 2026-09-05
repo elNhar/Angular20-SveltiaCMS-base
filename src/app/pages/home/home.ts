@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { SPECIALTIES } from '../../shared/specialties.data';
+import { InstagramEmbed } from '../../shared/instagram-embed/instagram-embed';
 import content from '../../../content/home.json';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, NgOptimizedImage],
+  imports: [RouterLink, NgOptimizedImage, InstagramEmbed],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

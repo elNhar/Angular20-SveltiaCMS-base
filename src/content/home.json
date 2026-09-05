@@ -1,6 +1,6 @@
 {
   "hero": {
-    "eyebrow": "Centro médico infantil y familiarrr",
+    "eyebrow": "Centro médico infantil y familiar",
     "title": "Nueve especialidades para el desarrollo de tus hijos",
     "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Un equipo interdisciplinario que evalúa, trata y acompaña a cada familia en un mismo lugar, con horarios que se acomodan al colegio.",
     "primaryButtonLabel": "Reservar una hora",
@@ -37,27 +37,33 @@
     "posts": [
       {
         "caption": "Taller de lactancia",
-        "image": "/images/placeholders/placeholder-square.jpg"
+        "image": "/images/placeholders/placeholder-square.jpg",
+        "postUrl": ""
       },
       {
         "caption": "Nuevo box de kinesiología",
-        "image": "/images/placeholders/placeholder-square.jpg"
+        "image": "/images/placeholders/placeholder-square.jpg",
+        "postUrl": ""
       },
       {
         "caption": "Equipo de fonoaudiología",
-        "image": "/images/placeholders/placeholder-square.jpg"
+        "image": "/images/placeholders/placeholder-square.jpg",
+        "postUrl": ""
       },
       {
         "caption": "Control sano: qué llevar",
-        "image": "/images/placeholders/placeholder-square.jpg"
+        "image": "/images/placeholders/placeholder-square.jpg",
+        "postUrl": ""
       },
       {
         "caption": "Horario de vacaciones",
-        "image": "/images/placeholders/placeholder-square.jpg"
+        "image": "/images/placeholders/placeholder-square.jpg",
+        "postUrl": ""
       },
       {
         "caption": "Antes y después de terapia",
-        "image": "/images/placeholders/placeholder-square.jpg"
+        "image": "/images/placeholders/placeholder-square.jpg",
+        "postUrl": ""
       }
     ]
   }

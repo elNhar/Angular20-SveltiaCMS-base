@@ -68,6 +68,7 @@ collections:
                 fields:
                   - { name: caption, label: Descripción, widget: string }
                   - { name: image, label: Imagen, widget: image }
+                  - { name: postUrl, label: 'URL del post de Instagram (opcional)', widget: string, required: false, hint: 'Pega el link a la publicación real (ej. https://www.instagram.com/p/XXXXXXXXX/) para mostrar el embed oficial en vez de la imagen. Vacío = se muestra la imagen.' }
 
       - name: about
         label: Quiénes somos
