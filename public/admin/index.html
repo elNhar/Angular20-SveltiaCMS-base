@@ -5,6 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Content Manager</title>
+
+    <!-- Match the Centro Médico site: same fonts + brand palette applied to Sveltia's
+         @sveltia/ui design tokens (all `hsl(var(--sui-base-hue) ...)`). The triple
+         `:root` selector outweighs SUI's own `:root` / `[data-theme]` rules whatever
+         the stylesheet order, so this wins without !important. Both light and dark
+         SUI themes are retinted; editors keep the theme switcher in Settings. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap"
+    />
+    <style>
+      :root:root:root {
+        /* Purple base hue tints every neutral toward the brand (site uses oklch hue 305). */
+        --sui-base-hue: 268;
+
+        /* Accent = Centro Médico brand purple  oklch(0.5 0.115 305) / #74519a */
+        --sui-primary-accent-color: #74519a;
+        --sui-primary-accent-color-light: #8462ad;
+        --sui-primary-accent-color-dark: #5d3f80;
+        --sui-primary-accent-color-text: #6b4f8a;
+        --sui-primary-accent-color-translucent: hsl(270 30% 45% / 60%);
+        --sui-primary-accent-color-translucent-light: hsl(270 30% 45% / 35%);
+        --sui-focus-ring-color: hsl(270 30% 45% / 55%);
+
+        /* Type — Space Grotesk headings, Work Sans body, same as the site. */
+        --sui-heading-font-family: 'Space Grotesk', system-ui, sans-serif;
+        --sui-font-family-default: 'Work Sans', system-ui, sans-serif;
+        --sui-control-font-family: 'Work Sans', system-ui, sans-serif;
+        --sui-textbox-font-family: 'Work Sans', system-ui, sans-serif;
+
+        /* Softer corners, closer to the site's 10px radius. */
+        --sui-button-small-border-radius: 6px;
+        --sui-button-medium-border-radius: 8px;
+        --sui-button-large-border-radius: 10px;
+        --sui-control-small-border-radius: 6px;
+        --sui-control-medium-border-radius: 8px;
+        --sui-control-large-border-radius: 10px;
+        --sui-textbox-border-radius: 8px;
+        --sui-listbox-border-radius: 8px;
+        --sui-option-border-radius: 6px;
+        --sui-tree-item-border-radius: 6px;
+      }
+
+      /* Lift the inline-accent text colour for contrast on the dark theme. */
+      @media (prefers-color-scheme: dark) {
+        :root:root:root:not([data-theme='light']) {
+          --sui-primary-accent-color-text: #b79bd6;
+        }
+      }
+      :root:root:root[data-theme='dark'] {
+        --sui-primary-accent-color-text: #b79bd6;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -110,20 +165,20 @@
           el.setAttribute('aria-live', 'polite');
           el.style.cssText =
             'position:fixed;right:16px;bottom:16px;z-index:2147483000;display:none;opacity:0;' +
-            'width:280px;padding:12px 14px;border-radius:12px;background:#1e293b;color:#f1f5f9;' +
+            'width:280px;padding:12px 14px;border-radius:12px;background:#241f2b;color:#efe9f4;' +
             'box-shadow:0 8px 30px rgba(0,0,0,.35);transition:opacity .2s;' +
-            'font:13px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
+            "font:13px/1.4 'Work Sans',system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif";
           el.innerHTML =
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">' +
-            '<span data-dw="spin" style="width:12px;height:12px;border:2px solid #64748b;' +
-            'border-top-color:#38bdf8;border-radius:50%;display:inline-block;' +
+            '<span data-dw="spin" style="width:12px;height:12px;border:2px solid #6b6472;' +
+            'border-top-color:#b79bd6;border-radius:50%;display:inline-block;' +
             'animation:dwspin 1s linear infinite"></span>' +
             '<strong data-dw="text" style="flex:1;font-weight:600">Deploy</strong>' +
             '<button data-dw="close" aria-label="Cerrar" style="background:none;border:none;' +
-            'color:#94a3b8;cursor:pointer;font-size:16px;line-height:1;padding:0">×</button>' +
+            'color:#a99fb3;cursor:pointer;font-size:16px;line-height:1;padding:0">×</button>' +
             '</div>' +
             '<div data-dw="bar" style="display:flex;gap:3px;margin-bottom:6px"></div>' +
-            '<div data-dw="sub" style="color:#94a3b8;font-size:12px"></div>';
+            '<div data-dw="sub" style="color:#a99fb3;font-size:12px"></div>';
           document.body.appendChild(el);
           barEl = el.querySelector('[data-dw="bar"]');
           textEl = el.querySelector('[data-dw="text"]');
@@ -135,7 +190,7 @@
           });
           for (var i = 0; i < STAGES.length; i++) {
             var seg = document.createElement('div');
-            seg.style.cssText = 'flex:1;height:4px;border-radius:2px;background:#475569';
+            seg.style.cssText = 'flex:1;height:4px;border-radius:2px;background:#4a4453';
             barEl.appendChild(seg);
           }
         }
@@ -160,11 +215,11 @@
           var stage = Math.max(0, Math.min(5, o.stage | 0));
           var segs = barEl.children;
           for (var i = 0; i < segs.length; i++) {
-            var c = '#475569';
+            var c = '#4a4453';
             if (o.done) c = '#34d399';
-            else if (o.failed) c = i <= stage ? '#f87171' : '#475569';
-            else if (i < stage) c = '#38bdf8';
-            else if (i === stage) c = '#0ea5e9';
+            else if (o.failed) c = i <= stage ? '#f87171' : '#4a4453';
+            else if (i < stage) c = '#b79bd6';
+            else if (i === stage) c = '#8462ad';
             segs[i].style.background = c;
           }
         }
