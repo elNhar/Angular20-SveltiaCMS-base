@@ -1,1 +1,195 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --color-bg: oklch(0.985 0.007 305);
+  --color-ink: oklch(0.300 0.025 305);
+  --color-ink-soft: oklch(0.450 0.025 305);
+  --color-ink-faint: oklch(0.550 0.025 305);
+  --color-border: oklch(0.890 0.016 305);
+  --color-border-soft: oklch(0.910 0.016 305);
+  --color-surface-sunken: oklch(0.965 0.012 305);
+
+  --color-brand: oklch(0.500 0.115 305);
+  --color-brand-hover: oklch(0.430 0.115 305);
+  --color-brand-deep: oklch(0.470 0.095 305);
+  --color-brand-deep-hover: oklch(0.410 0.095 305);
+  --color-brand-active: oklch(0.470 0.090 305);
+  --color-brand-footer: oklch(0.410 0.061 305);
+
+  --color-accent-orange: oklch(0.52 0.13 40);
+  --color-whatsapp: oklch(0.52 0.13 160);
+  --color-whatsapp-hover: oklch(0.45 0.12 160);
+
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Work Sans', system-ui, sans-serif;
+
+  --content-max: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-brand);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-brand-hover);
+  }
+}
+
+@keyframes vpulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Shared design-system primitives, reused across page components. */
+
+.eyebrow {
+  margin: 0 0 14px;
+  font: 500 12px/1 var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+
+  &--orange {
+    color: var(--color-accent-orange);
+  }
+
+  &--on-brand {
+    color: oklch(0.930 0.037 305);
+  }
+}
+
+.link-underline {
+  font-size: 14.5px;
+  font-weight: 500;
+  border-bottom: 1px solid oklch(0.780 0.049 305);
+  padding-bottom: 3px;
+  white-space: nowrap;
+}
+
+.section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 56px 28px;
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin: 0;
+    font: 700 clamp(25px, 2.6vw, 33px) / 1.1 var(--font-heading);
+    letter-spacing: -0.02em;
+
+    &--sm {
+      font-size: clamp(24px, 2.4vw, 30px);
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+
+  &--solid {
+    color: #fff;
+    background: var(--color-brand-deep);
+
+    &:hover {
+      background: var(--color-brand-deep-hover);
+      color: #fff;
+    }
+  }
+
+  &--outline {
+    color: oklch(0.370 0.066 305);
+    background: #fff;
+    border-color: var(--color-border);
+
+    &:hover {
+      background: oklch(0.950 0.012 305);
+    }
+  }
+
+  &--on-brand {
+    font-size: 14.5px;
+    padding: 12px 18px;
+    color: oklch(0.400 0.074 305);
+    background: #fff;
+
+    &:hover {
+      background: oklch(0.930 0.016 305);
+      color: oklch(0.400 0.074 305);
+    }
+  }
+
+  &--whatsapp {
+    font-size: 14.5px;
+    padding: 12px 18px;
+    color: #fff;
+    background: oklch(0.42 0.10 165);
+
+    &:hover {
+      background: oklch(0.36 0.09 165);
+      color: #fff;
+    }
+  }
+}
+
+.page-hero {
+  background: linear-gradient(180deg, oklch(0.965 0.018 305), oklch(0.985 0.007 305));
+  border-bottom: 1px solid var(--color-border-soft);
+
+  &__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 56px 28px;
+  }
+
+  &__title {
+    margin: 0 0 16px;
+    font: 700 clamp(32px, 3.8vw, 48px) / 1.06 var(--font-heading);
+    letter-spacing: -0.03em;
+    max-width: 26ch;
+    text-wrap: balance;
+  }
+
+  &__lead {
+    margin: 0;
+    font-size: 17.5px;
+    line-height: 1.6;
+    max-width: 60ch;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+}

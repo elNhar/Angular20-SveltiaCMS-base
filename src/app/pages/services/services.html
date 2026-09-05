@@ -1,0 +1,66 @@
+<section class="page-hero">
+  <div class="page-hero__inner">
+    <p class="eyebrow">Servicios</p>
+    <h1 class="page-hero__title">Nueve especialidades, un mismo equipo</h1>
+    <p class="page-hero__lead">
+      Toca cada especialidad para ver qué incluye, desde qué edad atendemos y cuánto dura la
+      sesión. Todas se atienden como particular con boleta para reembolso.
+    </p>
+  </div>
+</section>
+
+<section class="accordion-section">
+  <div class="accordion-section__toolbar">
+    <button type="button" class="toggle-all" (click)="toggleAll()">{{ toggleAllLabel() }}</button>
+  </div>
+  <div class="accordion">
+    @for (s of specialties; track s.name; let i = $index) {
+      <div class="accordion-item">
+        <button type="button" class="accordion-item__trigger" (click)="toggle(i)">
+          <span class="accordion-item__mark" [style.background]="s.tint" [style.color]="s.ink">{{ s.mark }}</span>
+          <span class="accordion-item__heading">
+            <span class="accordion-item__name">{{ s.name }}</span>
+            <span class="accordion-item__tagline">{{ s.tagline }}</span>
+          </span>
+          <span class="accordion-item__chevron" [class.is-open]="isOpen(i)">+</span>
+        </button>
+        @if (isOpen(i)) {
+          <div class="accordion-item__panel">
+            <p class="accordion-item__description">{{ s.body }}</p>
+            <div class="accordion-item__meta">
+              <div class="meta-card">
+                <div class="meta-card__label">Edades</div>
+                <div class="meta-card__value">{{ s.edades }}</div>
+              </div>
+              <div class="meta-card">
+                <div class="meta-card__label">Duración</div>
+                <div class="meta-card__value">{{ s.duracion }}</div>
+              </div>
+              <div class="meta-card">
+                <div class="meta-card__label">Profesionales</div>
+                <div class="meta-card__value">{{ s.equipo }}</div>
+              </div>
+            </div>
+            <ul class="accordion-item__list">
+              @for (p of s.incluye; track p) {
+                <li>{{ p }}</li>
+              }
+            </ul>
+            <a routerLink="/contacto" class="btn btn--solid">Reservar {{ s.name }}</a>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<section class="isapres-note">
+  <div class="isapres-note__card">
+    <h2 class="isapres-note__title">Reembolso Isapres</h2>
+    <p class="isapres-note__body">
+      Todas las prestaciones se atienden como particular. Emitimos boleta electrónica y bono para
+      presentar el reembolso en Fonasa o tu Isapre. Lorem ipsum dolor sit amet, consectetur
+      adipiscing elit.
+    </p>
+  </div>
+</section>

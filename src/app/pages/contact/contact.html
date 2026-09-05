@@ -1,0 +1,94 @@
+<section class="page-hero">
+  <div class="page-hero__inner">
+    <p class="eyebrow">Contacto</p>
+    <h1 class="page-hero__title">Estamos en Providencia, a dos cuadras del metro</h1>
+    <p class="page-hero__lead">
+      Escríbenos por WhatsApp para agendar más rápido, o déjanos tus datos y te llamamos dentro
+      del día hábil.
+    </p>
+  </div>
+</section>
+
+<section class="contact-grid">
+  <div class="details">
+    @for (d of details; track d.label) {
+      <div class="detail-card">
+        <div class="detail-card__label">{{ d.label }}</div>
+        <div class="detail-card__value">{{ d.value }}</div>
+      </div>
+    }
+    <div class="details__actions">
+      <a href="#" class="btn btn--whatsapp">Escribir por WhatsApp</a>
+      <a href="tel:+56221234567" class="btn btn--outline">Llamar al centro</a>
+    </div>
+  </div>
+
+  <div class="booking" id="agenda">
+    <h2 class="booking__title">Solicitar una hora</h2>
+    <p class="booking__lead">Te confirmamos por teléfono o WhatsApp dentro del día hábil.</p>
+    <form class="booking-form" [formGroup]="form" (ngSubmit)="submit()">
+      <label class="field">
+        Nombre del paciente
+        <input formControlName="nombre" placeholder="Nombre y apellido" />
+      </label>
+      <div class="field-row">
+        <label class="field">
+          Teléfono
+          <input formControlName="telefono" placeholder="+56 9 ..." />
+        </label>
+        <label class="field">
+          Edad
+          <input formControlName="edad" placeholder="Años" />
+        </label>
+      </div>
+      <label class="field">
+        Especialidad
+        <select formControlName="especialidad">
+          @for (e of specialtyNames; track e) {
+            <option [value]="e">{{ e }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        Motivo de consulta
+        <textarea formControlName="motivo" rows="3" placeholder="Cuéntanos brevemente"></textarea>
+      </label>
+      <button type="submit" class="booking-form__submit">Enviar solicitud</button>
+      @if (submitted()) {
+        <div class="booking-form__confirmation">
+          Solicitud enviada. Te contactamos dentro del día hábil. (Demo: no se envía nada.)
+        </div>
+      }
+    </form>
+  </div>
+</section>
+
+<section class="section directions">
+  <h2 class="section__title section__title--sm directions__title">Cómo llegar</h2>
+  <div class="directions-card">
+    <iframe
+      src="https://www.google.com/maps?q=Av.+Providencia+1234,+Providencia,+Santiago,+Chile&output=embed"
+      width="100%"
+      height="420"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Mapa del centro"
+    ></iframe>
+    <div class="directions-card__grid">
+      <div>
+        <div class="directions-card__label">Metro</div>
+        <div class="directions-card__value">Estación Manuel Montt, salida sur. Dos cuadras caminando.</div>
+      </div>
+      <div>
+        <div class="directions-card__label">Estacionamiento</div>
+        <div class="directions-card__value">
+          Convenio con estacionamiento subterráneo del edificio, primera hora liberada.
+        </div>
+      </div>
+      <div>
+        <div class="directions-card__label">Accesibilidad</div>
+        <div class="directions-card__value">Acceso sin escalones, ascensor y baño adaptado en el piso 5.</div>
+      </div>
+    </div>
+  </div>
+</section>

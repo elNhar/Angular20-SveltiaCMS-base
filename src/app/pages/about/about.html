@@ -1,0 +1,79 @@
+<section class="page-hero">
+  <div class="page-hero__inner">
+    <p class="eyebrow">Quiénes somos</p>
+    <h1 class="page-hero__title">Un centro pensado desde la consulta, no desde la sala de espera</h1>
+    <p class="page-hero__lead">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+    </p>
+  </div>
+</section>
+
+<section class="section history">
+  <div>
+    <h2 class="section__title section__title--sm">Nuestra historia</h2>
+    <p class="history__paragraph">
+      Vitalia abrió en 2012 con dos boxes y tres profesionales. Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit: la idea era simple, que una familia pudiera resolver la
+      evaluación, la terapia y el control en un mismo pasillo.
+    </p>
+    <p class="history__paragraph">
+      Hoy somos veintiocho personas y nueve especialidades. Duis aute irure dolor in
+      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, excepteur sint
+      occaecat cupidatat non proident.
+    </p>
+    <div class="timeline">
+      @for (h of milestones; track h.year) {
+        <div class="timeline__item">
+          <span class="timeline__dot"></span>
+          <div class="timeline__year">{{ h.year }}</div>
+          <div class="timeline__text">{{ h.text }}</div>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="history__media">
+    <div class="history__placeholder">
+      <span>foto: fachada del centro,<br />2012</span>
+    </div>
+    <div class="figures">
+      @for (c of figures; track c.label) {
+        <div class="figures__card">
+          <div class="figures__num">{{ c.n }}</div>
+          <div class="figures__label">{{ c.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="team__inner">
+    <h2 class="section__title section__title--sm">El equipo</h2>
+    <p class="team__lead">
+      Nueve especialidades, un solo equipo clínico que se reúne cada semana a revisar casos.
+    </p>
+    <div class="team__grid">
+      @for (p of team; track p.name) {
+        <div class="team-card">
+          <div class="team-card__avatar" [style.background]="p.tint" [style.color]="p.ink">{{ p.initials }}</div>
+          <div class="team-card__name">{{ p.name }}</div>
+          <div class="team-card__role">{{ p.role }}</div>
+          <div class="team-card__bio">{{ p.bio }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section__title section__title--sm values-title">Cómo trabajamos</h2>
+  <div class="values-grid">
+    @for (v of values; track v.title) {
+      <div class="value-card">
+        <div class="value-card__title">{{ v.title }}</div>
+        <div class="value-card__body">{{ v.body }}</div>
+      </div>
+    }
+  </div>
+</section>

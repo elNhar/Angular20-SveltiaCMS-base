@@ -1,0 +1,32 @@
+<div class="topbar">
+  <div class="topbar__inner">
+    <span class="topbar__status">
+      <span class="topbar__dot"></span>
+      Atención de lunes a sábado &mdash; agenda disponible esta semana
+    </span>
+    <span class="topbar__links">
+      <a href="tel:+56221234567">+56 2 2123 4567</a>
+      <a href="#">WhatsApp</a>
+    </span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a routerLink="/" class="nav__brand">
+      <span class="nav__mark">V</span>
+      <span class="nav__wordmark">
+        Vitalia
+        <span class="nav__wordmark-sub">Centro Médico Infantil</span>
+      </span>
+    </a>
+    <nav class="nav__links">
+      <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+      <a routerLink="/quienes-somos" routerLinkActive="is-active">Quiénes somos</a>
+      <a routerLink="/servicios" routerLinkActive="is-active">Servicios</a>
+      <a routerLink="/galeria" routerLinkActive="is-active">Galería</a>
+      <a routerLink="/contacto" routerLinkActive="is-active">Contacto</a>
+    </nav>
+    <a routerLink="/contacto" class="nav__cta">Reservar hora</a>
+  </div>
+</header>

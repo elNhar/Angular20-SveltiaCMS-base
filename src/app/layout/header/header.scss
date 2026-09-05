@@ -1,0 +1,132 @@
+:host {
+  display: block;
+}
+
+.topbar {
+  background: var(--color-brand-deep);
+  color: oklch(0.960 0.008 305);
+  font-size: 13.5px;
+
+  &__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 9px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: oklch(0.8 0.15 165);
+    animation: vpulse 2.4s ease-in-out infinite;
+  }
+
+  &__links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+
+    a {
+      color: oklch(0.950 0.016 305);
+    }
+  }
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: oklch(0.985 0.007 305 / 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+
+  &__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 15px 28px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: inherit;
+  }
+
+  &__mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 13px;
+    background: var(--color-brand);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font: 700 15px/1 var(--font-heading);
+  }
+
+  &__wordmark {
+    font: 700 18px/1.05 var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  &__wordmark-sub {
+    display: block;
+    font: 500 10px/1.4 var(--font-body);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  &__links {
+    display: flex;
+    gap: 24px;
+    margin-left: auto;
+    font-size: 14.5px;
+    font-weight: 500;
+    flex-wrap: wrap;
+
+    a {
+      color: oklch(0.340 0.025 305);
+      padding: 5px 0;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        border-bottom-color: var(--color-brand);
+      }
+
+      &.is-active {
+        color: var(--color-brand-active);
+        border-bottom-color: var(--color-brand);
+      }
+    }
+  }
+
+  &__cta {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-brand);
+    padding: 10px 16px;
+    border-radius: 9px;
+
+    &:hover {
+      background: var(--color-brand-hover);
+      color: #fff;
+    }
+  }
+}

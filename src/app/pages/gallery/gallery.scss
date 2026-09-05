@@ -1,0 +1,114 @@
+:host {
+  display: block;
+}
+
+.gallery-section {
+  padding-top: 40px;
+  padding-bottom: 64px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.filter-chip {
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: oklch(0.380 0.025 305);
+  border-radius: 20px;
+  padding: 9px 16px;
+  font: 500 13.5px var(--font-body);
+  cursor: pointer;
+
+  &.is-active {
+    border-color: var(--color-brand);
+    background: var(--color-brand);
+    color: #fff;
+  }
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.photo-tile {
+  border: 1px solid oklch(0.880 0.016 305);
+  border-radius: 18px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  text-align: left;
+  font-family: var(--font-body);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px oklch(0.500 0.049 305 / 0.13);
+  }
+
+  &__caption {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(180deg, transparent, oklch(0.350 0.049 305 / 0.72));
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+.gallery-note {
+  margin: 24px 0 0;
+  font-size: 13.5px;
+  color: var(--color-ink-faint);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: oklch(0.330 0.041 305 / 0.82);
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  backdrop-filter: blur(3px);
+
+  &__card {
+    max-width: 820px;
+    width: 100%;
+  }
+
+  &__placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    background: repeating-linear-gradient(135deg, oklch(0.900 0.025 305) 0 12px, oklch(0.955 0.016 305) 12px 24px);
+    display: grid;
+    place-items: center;
+
+    span {
+      font: 400 12.5px/1.5 ui-monospace, Menlo, monospace;
+      color: oklch(0.470 0.041 305);
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 14px;
+    color: oklch(0.940 0.012 305);
+    font-size: 14.5px;
+  }
+
+  &__hint {
+    font-size: 13px;
+    color: oklch(0.800 0.025 305);
+  }
+}

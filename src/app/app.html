@@ -1,18 +1,6 @@
-<main class="page">
-  <header class="hero">
-    <p class="hero__eyebrow">{{ hero.eyebrow }}</p>
-    <h1 class="hero__title">{{ hero.title }}</h1>
-    <p class="hero__subtitle">{{ hero.subtitle }}</p>
-  </header>
-
-  <section class="features" aria-label="Project features">
-    @for (feature of features; track feature.title) {
-      <article class="feature">
-        <h2 class="feature__title">{{ feature.title }}</h2>
-        <p class="feature__description">{{ feature.description }}</p>
-      </article>
-    }
-  </section>
-
+<div class="page">
+  <app-header />
   <router-outlet />
-</main>
+  <app-footer />
+  <app-whatsapp-fab />
+</div>

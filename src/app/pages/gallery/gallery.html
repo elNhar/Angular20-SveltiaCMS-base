@@ -1,0 +1,42 @@
+<section class="page-hero">
+  <div class="page-hero__inner">
+    <p class="eyebrow">Galería</p>
+    <h1 class="page-hero__title">Cómo es el centro por dentro</h1>
+    <p class="page-hero__lead">
+      Boxes, sala de terapia sensorial y espacios de espera. Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit.
+    </p>
+  </div>
+</section>
+
+<section class="section gallery-section">
+  <div class="filters">
+    @for (c of categories; track c) {
+      <button type="button" class="filter-chip" [class.is-active]="isActive(c)" (click)="pick(c)">
+        {{ c }}
+      </button>
+    }
+  </div>
+  <div class="photo-grid">
+    @for (p of photos(); track p.caption) {
+      <button type="button" class="photo-tile" [style.background]="p.tint" [style.aspect-ratio]="p.ratio" (click)="open(p.caption)">
+        <span class="photo-tile__caption">{{ p.caption }}</span>
+      </button>
+    }
+  </div>
+  <p class="gallery-note">Marcos de demostración &mdash; reemplazables por fotografías reales del centro.</p>
+</section>
+
+@if (lightbox(); as caption) {
+  <div class="lightbox" (click)="close()">
+    <div class="lightbox__card">
+      <div class="lightbox__placeholder">
+        <span>{{ caption }}</span>
+      </div>
+      <div class="lightbox__footer">
+        <span>{{ caption }}</span>
+        <span class="lightbox__hint">Toca fuera para cerrar</span>
+      </div>
+    </div>
+  </div>
+}
