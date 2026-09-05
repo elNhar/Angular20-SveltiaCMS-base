@@ -1,13 +1,13 @@
 # Sveltia CMS configuration — https://github.com/sveltia/sveltia-cms
 #
-# Update `backend.repo` once this project has a GitHub remote, e.g. "your-org/vite-angular-base".
-# Authentication on Cloudflare Pages typically goes through a small OAuth worker/function
-# (see https://github.com/sveltia/sveltia-cms-auth) — deploy one and point Cloudflare Pages'
-# custom auth settings at it, or use `base_url` below if you host the OAuth client elsewhere.
+# Authentication goes through the sveltia-cms-auth OAuth worker deployed on Cloudflare
+# (see https://github.com/sveltia/sveltia-cms-auth), backed by a GitHub OAuth App whose
+# callback URL is <base_url>/callback.
 backend:
   name: github
-  repo: your-org/vite-angular-base # TODO: replace with owner/repo
-  branch: main
+  repo: elNhar/vite-angular-base
+  branch: master
+  base_url: https://sveltia-cms-auth.dabiotti.workers.dev
 
 # Lets you run and test the CMS locally without OAuth, via `npx decap-server`.
 local_backend: true
