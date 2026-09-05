@@ -7,6 +7,27 @@
     <title>Content Manager</title>
   </head>
   <body>
+    <script>
+      // Polyfill for Uint8Array.prototype.toBase64/fromBase64 (Chrome < 140, Firefox < 133,
+      // Safari < 18.2). Sveltia CMS calls these unconditionally to encode/decode every commit,
+      // so without this, saving fails on any browser released before ~mid-2025. This runs as a
+      // classic script, which always executes before the `type="module"` CMS script below.
+      if (!Uint8Array.prototype.toBase64) {
+        Uint8Array.prototype.toBase64 = function () {
+          let binary = '';
+          for (let i = 0; i < this.length; i++) binary += String.fromCharCode(this[i]);
+          return btoa(binary);
+        };
+      }
+      if (!Uint8Array.fromBase64) {
+        Uint8Array.fromBase64 = function (base64) {
+          const binary = atob(base64);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+          return bytes;
+        };
+      }
+    </script>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
   </body>
 </html>
