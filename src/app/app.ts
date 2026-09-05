@@ -28,7 +28,7 @@ export class App {
     },
     {
       title: 'Server-side rendering',
-      description: 'SSR configured with @angular/ssr and an Express request handler.'
+      description: 'SSR configured with @angular/ssr, deployed as a Cloudflare Worker.'
     },
     {
       title: 'Unit testing',

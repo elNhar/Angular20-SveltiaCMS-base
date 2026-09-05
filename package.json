@@ -7,8 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:angular20-sveltiacms-base": "node dist/angular20-sveltiacms-base/server/server.mjs",
-    "cms:local": "decap-server"
+    "cms:local": "decap-server",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev",
+    "cf-typegen": "wrangler types"
   },
   "prettier": {
     "printWidth": 100,
@@ -32,7 +34,6 @@
     "@angular/platform-server": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/ssr": "^20.3.36",
-    "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -41,7 +42,6 @@
     "@angular/build": "^20.3.36",
     "@angular/cli": "^20.3.36",
     "@angular/compiler-cli": "^20.3.0",
-    "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
     "decap-server": "^3.11.0",
@@ -51,6 +51,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "wrangler": "^4.129.0",
+    "xhr2": "^0.2.1"
   }
 }
