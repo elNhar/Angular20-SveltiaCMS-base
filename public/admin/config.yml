@@ -5,7 +5,7 @@
 # callback URL is <base_url>/callback.
 backend:
   name: github
-  repo: elNhar/vite-angular-base
+  repo: elNhar/Angular20-SveltiaCMS-base
   branch: master
   base_url: https://sveltia-cms-auth.dabiotti.workers.dev
 

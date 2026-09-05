@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "vite-angular-base",
+      "name": "angular20-sveltiacms-base",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["start"],
       "port": 4200
