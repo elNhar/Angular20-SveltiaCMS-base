@@ -29,5 +29,327 @@
       }
     </script>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+
+    <script>
+      // Deploy progress widget. Sveltia CMS has no native "is my change live yet?"
+      // indicator, so this classic script (no deps) draws a small pill that tracks the
+      // GitHub Actions "Deploy" run triggered by each save, then confirms the new build
+      // is actually on the Cloudflare edge by polling /version.json (written by CI).
+      (function () {
+        'use strict';
+        if (window.__deployWidget) return;
+        window.__deployWidget = true;
+
+        var HOST = location.hostname;
+        // Local backend (npx decap-server): no real deploy to track.
+        if (HOST === 'localhost' || HOST === '127.0.0.1' || HOST.endsWith('.local')) return;
+
+        var REPO = 'elNhar/Angular20-SveltiaCMS-base'; // keep in sync with backend.repo in config.yml
+        var BRANCH = 'master';
+        var API = 'https://api.github.com/repos/' + REPO;
+        var IDLE_POLL_MS = 90000;
+        var ACTIVE_POLL_MS = 6000;
+        var VERIFY_POLL_MS = 5000;
+        var VERIFY_TIMEOUT_MS = 120000;
+        var RECENT_MS = 3 * 60 * 1000;
+        var EXPECT_GIVEUP_MS = 4 * 60 * 1000;
+        var STAGES = ['Preparando', 'Instalando', 'Probando', 'Compilando', 'Publicando'];
+
+        function stageOf(name) {
+          var n = (name || '').toLowerCase();
+          if (/deploy to cloudflare|wrangler/.test(n)) return 4;
+          if (/npm run build|version\.json/.test(n)) return 3;
+          if (/npm test/.test(n)) return 2;
+          if (/npm ci/.test(n)) return 1;
+          if (/checkout|setup-node|set up job/.test(n)) return 0;
+          return -1;
+        }
+
+        function ghToken() {
+          try {
+            var raw = localStorage.getItem('sveltia-cms.user');
+            var u = raw && JSON.parse(raw);
+            return (u && u.token) || null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function gh(path) {
+          var headers = { Accept: 'application/vnd.github+json' };
+          var t = ghToken();
+          if (t) headers.Authorization = 'Bearer ' + t;
+          return fetch(API + path, { headers: headers, cache: 'no-store' }).then(function (r) {
+            if (r.status === 403 || r.status === 429) {
+              var reset = Number(r.headers.get('X-RateLimit-Reset'));
+              var err = new Error('rate-limited');
+              err.rateLimited = true;
+              err.resetMs = reset ? reset * 1000 - Date.now() : 60000;
+              throw err;
+            }
+            if (!r.ok) throw new Error('gh ' + r.status);
+            return r.json();
+          });
+        }
+
+        function fetchVersion() {
+          return fetch('/version.json?_=' + Date.now(), { cache: 'no-store' })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .catch(function () { return null; });
+        }
+
+        // ---------- UI ----------
+        var el, barEl, textEl, subEl, spinEl;
+        function ensureUI() {
+          if (el) return;
+          var style = document.createElement('style');
+          style.textContent = '@keyframes dwspin{to{transform:rotate(360deg)}}';
+          document.head.appendChild(style);
+          el = document.createElement('div');
+          el.setAttribute('role', 'status');
+          el.setAttribute('aria-live', 'polite');
+          el.style.cssText =
+            'position:fixed;right:16px;bottom:16px;z-index:2147483000;display:none;opacity:0;' +
+            'width:280px;padding:12px 14px;border-radius:12px;background:#1e293b;color:#f1f5f9;' +
+            'box-shadow:0 8px 30px rgba(0,0,0,.35);transition:opacity .2s;' +
+            'font:13px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
+          el.innerHTML =
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">' +
+            '<span data-dw="spin" style="width:12px;height:12px;border:2px solid #64748b;' +
+            'border-top-color:#38bdf8;border-radius:50%;display:inline-block;' +
+            'animation:dwspin 1s linear infinite"></span>' +
+            '<strong data-dw="text" style="flex:1;font-weight:600">Deploy</strong>' +
+            '<button data-dw="close" aria-label="Cerrar" style="background:none;border:none;' +
+            'color:#94a3b8;cursor:pointer;font-size:16px;line-height:1;padding:0">×</button>' +
+            '</div>' +
+            '<div data-dw="bar" style="display:flex;gap:3px;margin-bottom:6px"></div>' +
+            '<div data-dw="sub" style="color:#94a3b8;font-size:12px"></div>';
+          document.body.appendChild(el);
+          barEl = el.querySelector('[data-dw="bar"]');
+          textEl = el.querySelector('[data-dw="text"]');
+          subEl = el.querySelector('[data-dw="sub"]');
+          spinEl = el.querySelector('[data-dw="spin"]');
+          el.querySelector('[data-dw="close"]').addEventListener('click', function () {
+            dismissedRunId = currentRunId;
+            hide();
+          });
+          for (var i = 0; i < STAGES.length; i++) {
+            var seg = document.createElement('div');
+            seg.style.cssText = 'flex:1;height:4px;border-radius:2px;background:#475569';
+            barEl.appendChild(seg);
+          }
+        }
+        function show() {
+          ensureUI();
+          el.style.display = 'block';
+          requestAnimationFrame(function () { el.style.opacity = '1'; });
+        }
+        function hide() {
+          if (!el) return;
+          el.style.opacity = '0';
+          setTimeout(function () { if (el) el.style.display = 'none'; }, 200);
+        }
+        function render(o) {
+          ensureUI();
+          show();
+          el.onclick = null;
+          el.style.cursor = '';
+          textEl.textContent = o.title;
+          subEl.textContent = o.sub || '';
+          spinEl.style.display = o.spinning === false ? 'none' : 'inline-block';
+          var stage = Math.max(0, Math.min(5, o.stage | 0));
+          var segs = barEl.children;
+          for (var i = 0; i < segs.length; i++) {
+            var c = '#475569';
+            if (o.done) c = '#34d399';
+            else if (o.failed) c = i <= stage ? '#f87171' : '#475569';
+            else if (i < stage) c = '#38bdf8';
+            else if (i === stage) c = '#0ea5e9';
+            segs[i].style.background = c;
+          }
+        }
+
+        // ---------- state ----------
+        var timer = null;
+        var currentRunId = null;
+        var dismissedRunId = null;
+        var runUrl = '';
+        var startedAt = 0;
+        var lastStage = 0;
+        var verifying = false;
+        var verifySha = '';
+        var verifyStart = 0;
+        var expecting = false;
+        var expectingSince = 0;
+
+        function later(ms) {
+          clearTimeout(timer);
+          timer = setTimeout(poll, ms);
+        }
+        function elapsed() {
+          var s = Math.max(0, Math.round((Date.now() - startedAt) / 1000));
+          return s < 60 ? s + 's' : Math.floor(s / 60) + 'm ' + (s % 60) + 's';
+        }
+
+        function poll() {
+          if (verifying) return verifyTick();
+          if (document.visibilityState === 'hidden') return later(IDLE_POLL_MS);
+          gh('/actions/runs?branch=' + BRANCH + '&per_page=1&event=push').then(function (data) {
+            handleRun(data.workflow_runs && data.workflow_runs[0]);
+          }).catch(handleErr);
+        }
+
+        function handleRun(run) {
+          if (!run) return later(IDLE_POLL_MS);
+          if (run.id === dismissedRunId) return later(IDLE_POLL_MS);
+
+          if (run.id !== currentRunId) {
+            var createdMs = new Date(run.created_at).getTime();
+            if (expecting && createdMs < expectingSince - 5000) {
+              if (Date.now() - expectingSince > EXPECT_GIVEUP_MS) { expecting = false; hide(); }
+              return later(3000);
+            }
+            var interesting = run.status !== 'completed' || expecting || Date.now() - createdMs < RECENT_MS;
+            currentRunId = run.id;
+            runUrl = run.html_url;
+            startedAt = new Date(run.run_started_at || run.created_at).getTime();
+            lastStage = 0;
+            expecting = false;
+            if (!interesting) return later(IDLE_POLL_MS);
+          }
+
+          if (run.status === 'completed') {
+            if (run.conclusion === 'success') return startVerify(run.head_sha);
+            render({
+              title: '❌ Falló el deploy',
+              failed: true,
+              stage: lastStage,
+              sub: 'Toca para ver el detalle en GitHub',
+              spinning: false,
+            });
+            el.style.cursor = 'pointer';
+            el.onclick = function (e) {
+              if (e.target.getAttribute('data-dw') !== 'close') window.open(runUrl, '_blank', 'noopener');
+            };
+            return later(IDLE_POLL_MS);
+          }
+
+          gh('/actions/runs/' + run.id + '/jobs').then(function (j) {
+            renderActive(j && j.jobs && j.jobs[0]);
+          }).catch(function () {
+            renderActive(null);
+          });
+          later(ACTIVE_POLL_MS);
+        }
+
+        function renderActive(job) {
+          var stage = lastStage;
+          var label = 'En cola…';
+          if (job && job.status === 'in_progress') {
+            var steps = job.steps || [];
+            var running = null;
+            var lastDone = null;
+            for (var i = 0; i < steps.length; i++) {
+              if (steps[i].status === 'in_progress') running = steps[i];
+              if (steps[i].status === 'completed') lastDone = steps[i];
+            }
+            var s = stageOf((running || lastDone || {}).name);
+            if (s >= 0) stage = s;
+            label = STAGES[stage] || 'Trabajando…';
+          } else if (!job) {
+            stage = Math.max(stage, 1);
+            label = 'Compilando y publicando…';
+          }
+          lastStage = stage;
+          render({ title: 'Publicando cambios', stage: stage, sub: label + ' · ' + elapsed() });
+        }
+
+        function startVerify(sha) {
+          verifying = true;
+          verifySha = sha;
+          verifyStart = Date.now();
+          render({
+            title: 'Publicando en el edge…',
+            stage: 4,
+            sub: 'Esperando propagación · ' + elapsed(),
+          });
+          clearTimeout(timer);
+          timer = setTimeout(poll, 1500);
+        }
+
+        function verifyTick() {
+          fetchVersion().then(function (v) {
+            if (v && v.sha === verifySha) return finishOk('Visibles ahora · ' + elapsed(), false);
+            if (Date.now() - verifyStart > VERIFY_TIMEOUT_MS) return finishOk('Deploy completado', true);
+            render({
+              title: 'Publicando en el edge…',
+              stage: 4,
+              sub: 'Esperando propagación · ' + elapsed(),
+            });
+            clearTimeout(timer);
+            timer = setTimeout(poll, VERIFY_POLL_MS);
+          });
+        }
+
+        function finishOk(sub, soft) {
+          verifying = false;
+          render({
+            title: soft ? '✅ Deploy completado' : '✅ Cambios publicados',
+            done: true,
+            stage: 5,
+            sub: sub,
+            spinning: false,
+          });
+          clearTimeout(timer);
+          setTimeout(hide, 20000);
+          timer = setTimeout(poll, IDLE_POLL_MS);
+        }
+
+        function handleErr(e) {
+          if (e && e.rateLimited) {
+            if (el && el.style.display === 'block') subEl.textContent = 'Sin datos (límite de API alcanzado)';
+            return later(Math.min(Math.max(e.resetMs + 2000, 10000), 5 * 60 * 1000));
+          }
+          later(IDLE_POLL_MS);
+        }
+
+        function onSaved() {
+          expecting = true;
+          expectingSince = Date.now();
+          startedAt = Date.now();
+          lastStage = 0;
+          verifying = false;
+          dismissedRunId = null;
+          render({ title: 'Guardado ✓ — publicando…', stage: 0, sub: 'Esperando a GitHub Actions…' });
+          clearTimeout(timer);
+          timer = setTimeout(poll, 4000);
+        }
+
+        // Hook Sveltia/Decap save events for instant feedback (polling is the fallback).
+        var waitTries = 0;
+        var waitCMS = setInterval(function () {
+          waitTries++;
+          var CMS = window.CMS;
+          if (CMS && typeof CMS.registerEventListener === 'function') {
+            clearInterval(waitCMS);
+            ['postSave', 'postPublish'].forEach(function (name) {
+              try {
+                CMS.registerEventListener({ name: name, handler: onSaved });
+              } catch (e) {
+                /* event name not supported by this CMS build */
+              }
+            });
+          } else if (waitTries > 40) {
+            clearInterval(waitCMS);
+          }
+        }, 500);
+
+        document.addEventListener('visibilitychange', function () {
+          if (document.visibilityState === 'visible') poll();
+        });
+
+        poll();
+      })();
+    </script>
   </body>
 </html>

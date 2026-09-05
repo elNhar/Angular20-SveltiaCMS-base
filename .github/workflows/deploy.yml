@@ -23,6 +23,14 @@ jobs:
 
       - run: npm run build
 
+      # Stamp the built output with the commit that produced it, so the CMS
+      # deploy widget can tell exactly when the new version is live on the edge.
+      - name: Write version.json
+        run: |
+          printf '{"sha":"%s","runId":"%s","runNumber":"%s","builtAt":"%s"}\n' \
+            "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_NUMBER" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            > dist/browser/version.json
+
       - name: Deploy to Cloudflare Workers
         run: npx wrangler deploy
         env:
