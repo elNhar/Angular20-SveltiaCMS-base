@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "angular20-sveltiacms-base",
+  "name": "centro-medico",
   "account_id": "b19b661650d858c081d88ad949cc4634",
   "main": "./dist/server/server.mjs",
   "compatibility_date": "2026-09-03",

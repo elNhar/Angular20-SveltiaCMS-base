@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular20-sveltiacms-base": {
+    "centro-medico": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -74,10 +74,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular20-sveltiacms-base:build:production"
+              "buildTarget": "centro-medico:build:production"
             },
             "development": {
-              "buildTarget": "angular20-sveltiacms-base:build:development"
+              "buildTarget": "centro-medico:build:development"
             }
           },
           "defaultConfiguration": "development"
